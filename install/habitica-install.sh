@@ -39,8 +39,8 @@ msg_ok "Setup Node.js"
 
 msg_info "Setup ${APPLICATION}"
 temp_file=$(mktemp)
-RELEASE=$(curl -s https://api.github.com/repos/HabitRPG/habitica/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
-wget -q "https://github.com/HabitRPG/habitica/archive/refs/tags/v${RELEASE}.tar.gz" -O $temp_file
+RELEASE=$(curl -s https://api.github.com/repos/awinterstein/habitica/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
+wget -q "https://github.com/awinterstein/habitica/archive/refs/tags/v${RELEASE}.tar.gz" -O $temp_file
 tar zxf $temp_file
 mv habitica-${RELEASE}/ /opt/habitica
 cd /opt/habitica
