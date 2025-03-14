@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source <(curl -s https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
+source <(curl -s https://raw.githubusercontent.com/LorCW/ProxmoxVE/main/misc/build.func)
 # Copyright (c) 2021-2025 community-scripts ORG
 # Author: Slaviša Arežina (tremor021)
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -28,7 +28,7 @@ function update_script() {
         msg_error "No ${APP} Installation Found!"
         exit
     fi
-    RELEASE=$(curl -s https://api.github.com/repos/HabitRPG/habitica/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
+    RELEASE=$(curl -s https://api.github.com/repos/awinterstein/habitica/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
     if [[ "${RELEASE}" != "$(cat /opt/${APP}_version.txt)" ]] || [[ ! -f /opt/${APP}_version.txt ]]; then
         msg_info "Stopping $APP"
         systemctl stop habitica-mongodb
@@ -38,7 +38,7 @@ function update_script() {
 
         msg_info "Updating $APP to ${RELEASE}"
         temp_file=$(mktemp)
-        wget -q "https://github.com/HabitRPG/habitica/archive/refs/tags/v${RELEASE}.tar.gz" -O $temp_file
+        wget -q "https://github.com/awinterstein/habitica/archive/refs/tags/v${RELEASE}.tar.gz" -O $temp_file
         tar zxf $temp_file
         cp -rf habitica-${RELEASE}/* /opt/habitica
         cd /opt/habitica
